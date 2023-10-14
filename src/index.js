@@ -22,7 +22,15 @@ async function generateManual(fileMd, {
   const fileHtml = await _writeFile('./.temp.html', html);
   const {href: urlHtml} = new URL(fileHtml, 'file://');
 
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: [
+      '--no-sandbox',
+      '--headless',
+      '--disable-gpu',
+      '--disable-dev-shm-usage'
+    ]
+  })
   const page = await browser.newPage();
   await page.goto(urlHtml);
   await page.pdf({path: outputPdf, format: 'A4'});
