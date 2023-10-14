@@ -24,6 +24,7 @@ async function generateManual(fileMd, {
 
   const browser = await puppeteer.launch({
     headless: true,
+    executablePath: '/usr/bin/chromium-browser',
     args: [
       '--no-sandbox',
       '--headless',
